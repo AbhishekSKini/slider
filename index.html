@@ -2,14 +2,18 @@
 <html>
 <head>
     <style>
+   
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Darker+Grotesque:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
        
         .slideshow-container {
+  
             max-width: 100%;
             position: relative;
             margin: auto;
             overflow: hidden;
-            font-family: Verdana, Geneva, sans-serif;
+            font-family: "Karla", serif;
         }
         
         .mySlides {
@@ -25,7 +29,22 @@
             object-fit: cover;
         }
     
-       
+        .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent gray background */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    line-height: 2rem;
+}
        
     
         /* Navigation Arrows */
@@ -53,6 +72,7 @@
     
         /* Dots Styling */
         .dot-container {
+            display: none;
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -79,7 +99,12 @@
                 height: 60vh !important;
             }
             
-            
+            .text-overlay {
+        font-size: 18px;
+        padding: 10px;
+        width: 90%;
+        line-height: 2rem;
+    }
     
             .text-box h2 {
                 font-size: 32px;
@@ -108,7 +133,12 @@
             }
             
     
-           
+            .text-overlay {
+        font-size: 18px;
+        padding: 10px;
+        width: 90%;
+        line-height: 2rem;
+    }
     
             .prev, .next {
                 width: 25px;
@@ -129,27 +159,29 @@
     <div class="slideshow-container">
         <div class="mySlides">
             <img  src="https://sanstrat.in/wp-content/uploads/2025/02/india-gate-1.png" alt="Slide 1">
-           
+            <div class="text-overlay">India Beckons</div>
         </div>
         
         <div class="mySlides">
-            <img src="https://sanstrat.in/wp-content/uploads/2025/02/close-up-medical-team-ready-work-1-scaled.jpg" alt="Slide 2">
-            
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/male-working-as-paediatrician-1-scaled.jpg" alt="Slide 2">
+            <div class="text-overlay">India – the most populous nation on the planet, home to over one-sixth of the world's population.</div>
         </div>
         
         <div class="mySlides">
-            <img src="https://sanstrat.in/wp-content/uploads/2025/02/male-working-as-paediatrician-1-scaled.jpg" alt="Slide 3">
-            
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/man-stands-crowded-street-with-flag-background-scaled.jpg" alt="Slide 3">
+            <div class="text-overlay">India – the largest and most vibrant democracy in the world.
+            </div>
         </div>
         
         <div class="mySlides">
             <img src="https://sanstrat.in/wp-content/uploads/2025/02/city-1-scaled.jpg" alt="Slide 4">
-           
+            <div class="text-overlay">India – the fastest-growing economy, with a ~7% GDP growth rate and the 5th largest economy globally.
+            </div>
         </div>
     
         <div class="mySlides">
-            <img src="https://sanstrat.in/wp-content/uploads/2025/02/slider.jpg" alt="Slide 5">
-            
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/close-up-medical-team-ready-work-1-scaled.jpg" alt="Slide 5">
+            <div class="text-overlay">India – home to over 1 million doctors, 75,000 hospitals, 100,000 diagnostic centers, and a robust healthcare industry growing at a 12-15% CAGR</div>
         </div>
     
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -170,8 +202,10 @@
     let startX = 0;
     let endX = 0;
     let isDragging = false;
+    let slideInterval;
     
     showSlides(slideIndex);
+    startAutoSlide();
 
     const container = document.querySelector('.slideshow-container');
 
@@ -179,11 +213,11 @@
     container.addEventListener('touchstart', handleDragStart, false);
     container.addEventListener('touchend', handleDragEnd, false);
 
-    // Mouse Events for Desktop
-    container.addEventListener('mousedown', handleDragStart, false);
-    container.addEventListener('mouseup', handleDragEnd, false);
-    container.addEventListener('mouseleave', handleDragEnd, false);
-    container.addEventListener('mousemove', handleDragMove, false);
+    // Add these event listeners to pause/resume auto-slide
+    container.addEventListener('mouseenter', pauseAutoSlide);
+    container.addEventListener('mouseleave', startAutoSlide);
+    container.addEventListener('touchstart', pauseAutoSlide);
+    container.addEventListener('touchend', startAutoSlide);
 
     function handleDragStart(e) {
         isDragging = true;
@@ -232,12 +266,35 @@
         }
     }
 
+    function startAutoSlide() {
+        // Clear any existing interval first
+        if (slideInterval) {
+            clearInterval(slideInterval);
+        }
+        // Start a new interval that changes slides every 5 seconds
+        slideInterval = setInterval(() => {
+            plusSlides(1);
+        }, 5000);
+    }
+
+    function pauseAutoSlide() {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+        }
+    }
+
     function plusSlides(n) { 
-        showSlides(slideIndex += n); 
+        showSlides(slideIndex += n);
+        // Restart the timer when manually changing slides
+        pauseAutoSlide();
+        startAutoSlide();
     }
     
     function currentSlide(n) { 
-        showSlides(slideIndex = n); 
+        showSlides(slideIndex = n);
+        // Restart the timer when manually changing slides
+        pauseAutoSlide();
+        startAutoSlide();
     }
 
     function showSlides(n) {
