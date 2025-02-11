@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+       
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            font-family: Verdana, Geneva, sans-serif;
+        }
+        
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 80vh;
+            position: relative;
+        }
+        
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+       
+       
+    
+        /* Navigation Arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 100, 0.5);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+        }
+    
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        
+        .prev:hover, .next:hover { background-color: rgba(0, 0, 100, 0.8); }
+    
+        /* Dots Styling */
+        .dot-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+    
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+    
+        .active, .dot:hover { background-color: #007bff; }
+        
+   /* Tablet view */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+            .mySlides {
+                height: 60vh !important;
+            }
+            
+            
+    
+            .text-box h2 {
+                font-size: 32px;
+            }
+    
+            .learn-more {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+    
+            .prev, .next {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+    
+            .dot {
+                height: 10px;
+                width: 10px;
+            }
+        }
+ /* Mobile view */
+@media screen and (max-width: 768px) {
+            .mySlides {
+                height: 60vh !important;
+            }
+            
+    
+           
+    
+            .prev, .next {
+                width: 25px;
+                height: 25px;
+                font-size: 16px;
+            }
+    
+            .dot {
+                height: 8px;
+                width: 8px;
+            }
+    
+        }
+    </style>
+  
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="mySlides">
+            <img  src="https://sanstrat.in/wp-content/uploads/2025/02/india-gate-1.png" alt="Slide 1">
+           
+        </div>
+        
+        <div class="mySlides">
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/close-up-medical-team-ready-work-1-scaled.jpg" alt="Slide 2">
+            
+        </div>
+        
+        <div class="mySlides">
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/male-working-as-paediatrician-1-scaled.jpg" alt="Slide 3">
+            
+        </div>
+        
+        <div class="mySlides">
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/city-1-scaled.jpg" alt="Slide 4">
+           
+        </div>
+    
+        <div class="mySlides">
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/slider.jpg" alt="Slide 5">
+            
+        </div>
+    
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(4)"></span> 
+            <span class="dot" onclick="currentSlide(5)"></span> 
+        </div>
+    </div>
+
+</body>
+<script>
+    let slideIndex = 1;
+    let startX = 0;
+    let endX = 0;
+    let isDragging = false;
+    
+    showSlides(slideIndex);
+
+    const container = document.querySelector('.slideshow-container');
+
+    // Touch Events
+    container.addEventListener('touchstart', handleDragStart, false);
+    container.addEventListener('touchend', handleDragEnd, false);
+
+    // Mouse Events for Desktop
+    container.addEventListener('mousedown', handleDragStart, false);
+    container.addEventListener('mouseup', handleDragEnd, false);
+    container.addEventListener('mouseleave', handleDragEnd, false);
+    container.addEventListener('mousemove', handleDragMove, false);
+
+    function handleDragStart(e) {
+        isDragging = true;
+        startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    }
+
+    function handleDragMove(e) {
+        if (!isDragging) return;
+        e.preventDefault(); // Prevent image dragging
+    }
+
+    function handleDragEnd(e) {
+        if (!isDragging && e.type !== 'touchend') return;
+        
+        endX = e.type === 'mouseup' || e.type === 'mouseleave' 
+            ? e.clientX 
+            : e.changedTouches[0].clientX;
+        
+        handleSwipe();
+        isDragging = false;
+    }
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const difference = startX - endX;
+        
+        if (Math.abs(difference) > swipeThreshold) {
+            if (difference > 0) {
+                // Swipe left - show next slide
+                plusSlides(1);
+            } else {
+                // Swipe right - show previous slide
+                plusSlides(-1);
+            }
+        } else {
+            // Handle as a click if the movement was small
+            const clickPosition = endX;
+            const containerWidth = container.offsetWidth;
+            const middle = containerWidth / 2;
+            
+            if (clickPosition > middle) {
+                plusSlides(1);
+            } else {
+                plusSlides(-1);
+            }
+        }
+    }
+
+    function plusSlides(n) { 
+        showSlides(slideIndex += n); 
+    }
+    
+    function currentSlide(n) { 
+        showSlides(slideIndex = n); 
+    }
+
+    function showSlides(n) {
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
+
+        for (let slide of slides) { slide.style.display = "none"; }
+        for (let dot of dots) { dot.className = dot.className.replace(" active", ""); }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+</html>
+
