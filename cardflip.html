@@ -42,10 +42,6 @@
        
     }
 
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-    }
-
     /* Front and back styles */
     .flip-card-front,
     .flip-card-back {
@@ -92,6 +88,7 @@
         color: black;
         font-family: 'DM Sans';
         font-size: 20px;
+        
       
     }
 
@@ -99,16 +96,29 @@
 
         color: rgb(90, 88, 88);
         font-family: 'DM Sans';
-        font-size: 12px;
+        font-size: 11px;
         line-height: 1rem;
     }
 
-    .flip-card-back h4 {
+    .flip-card-back h4{
         color: black;
         font-family: 'DM Sans';
         font-size: 16px;
         text-align: left;
         font-weight: 400;
+       
+    }
+#sangeeth h3{
+margin-bottom: -4.5px;
+}
+
+    #sangeeth span{
+        color: black;
+        font-family: 'DM Sans';
+        font-size: 16px;
+        text-align: center;
+        font-weight: 400;
+        margin-top: -30px;
     }
  /* Mobile view */
  @media screen and (max-width: 768px) {
@@ -131,6 +141,16 @@
 
     }
    }
+
+/* Remove or comment out the hover style */
+/* .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+} */
+
+/* Add this class for the flipped state */
+.flip-card-inner.flipped {
+    transform: rotateY(180deg);
+}
 </style>
 </head>
 <body>
@@ -139,7 +159,8 @@
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="https://sanstrat.in/wp-content/uploads/2025/02/sangeeth-1086x1536.png" alt="Image 1">
-                <div class="expert-details"><h3>Sangeeth Kini</h3>
+                <div class="expert-details" id="sangeeth"><h3>Sangeeth Kini</h3>
+                    <span>(Founder of Sanstrat)</span>
                     <p>MBA in Marketing & Finance, Masters in Business Laws, Post Graduate Diploma in Medical Law & Ethics, Certified Independent Director</p>
                     </div>
             </div>
@@ -151,10 +172,10 @@
  <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="https://sanstrat.in/wp-content/uploads/2025/02/vijay-1086x1536.png" alt="Image 3">
+                <img src="https://sanstrat.in/wp-content/uploads/2025/02/vijay-1.png" alt="Image 3">
                 <div class="expert-details">
                     <h3>Vijay Narayan</h3>
-                    <p>B.Sc, MBA.</p>
+                    <p>B.Sc, Master of Business Administration.</p>
                 </div>
             </div>
             <div class="flip-card-back">
@@ -165,7 +186,7 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="https://sanstrat.in/wp-content/uploads/2025/02/Jaldeep-1086x1536.png" alt="Image 2">
+                <img src="https://sanstrat.in/wp-content/uploads/2025/02/Jaldeep-1.png" alt="Image 2">
                 <div class="expert-details">
                     <h3>Jaldeep Bhansali</h3>
                     <p>M. Sc. (Biochemistry), PGDBA (Post Graduate Diploma in Business Administration)</p>
@@ -185,12 +206,11 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="https://sanstrat.in/wp-content/uploads/2025/02/balmram-1086x1536.png" alt="Image 4">
+                <img src="https://sanstrat.in/wp-content/uploads/2025/02/balmram-1.png" alt="Image 4">
                 <div class="expert-details">
                     <h3>Balram Parath</h3>
-                    <p>MSc Clinical Biochemistry, MBA</p>
+                    <p>MSc Clinical Biochemistry, MBA</p>
                 </div>
-
             </div>
             <div class="flip-card-back">
                 <h4>Balram has extensive experience in the IVD, Transfusion Medicine, Life Sciences, and Healthcare
@@ -204,7 +224,7 @@
  <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="https://sanstrat.in/wp-content/uploads/2025/02/sudha.png" alt="Image 4">
+                <img src="https://sanstrat.in/wp-content/uploads/2025/02/sudha-1.png" alt="Image 4">
                 <div class="expert-details">
                     <h3>Sudha Morey</h3>
                     <p>Postgraduate in Applied Biology.</p>
@@ -220,5 +240,17 @@
 
     
 </div>
+<script>
+    // Get all flip cards
+    const flipCards = document.querySelectorAll('.flip-card');
+
+    // Add click event listener to each card
+    flipCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const inner = this.querySelector('.flip-card-inner');
+            inner.classList.toggle('flipped');
+        });
+    });
+</script>
 </body>
 </html>
