@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Darker+Grotesque:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+        .logo-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: 'DM Sans', sans-serif;
+
+        }
+
+        .logo-desc-container {
+            width: 50%;
+
+        }
+
+        .logo-desc-container h4 {
+            color: #10488E;
+            text-align: right;
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 32px;
+            letter-spacing: -0.5px;
+            word-spacing: 3px;
+        }
+
+        .logo-desc-container p {
+            text-align: right;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: -0.5px;
+            word-spacing: 3px;
+        }
+
+        .image-logo img {
+            width: 60%;
+            margin-left: 20%;
+        }
+
+        /* Add these media queries */
+        @media screen and (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .logo-desc-container {
+                width: 100%;
+            }
+
+            .logo-desc-container h4 {
+                text-align: center;
+                font-size: 22px;
+                line-height: 28px;
+            }
+
+            .logo-desc-container p {
+                text-align: center;
+                font-size: 14px;
+                line-height: 18px;
+                padding: 0 15px;
+            }
+
+            .image-logo img {
+                width: 80%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        /* For even smaller screens */
+        @media screen and (max-width: 480px) {
+            .logo-desc-container h4 {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            .logo-desc-container p {
+                font-size: 13px;
+                line-height: 17px;
+            }
+
+            .image-logo img {
+                width: 90%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="logo-container">
+        <div class="logo-desc-container image-logo">
+            <img src="https://sanstrat.in/wp-content/uploads/2025/02/Logo-big-1024x576.png" alt="logo" />
+        </div>
+        <div class="logo-desc-container logo-description">
+            <h4>The only Strategic Advisory Firm focused on
+                the Diagnostic healthcare sector in India</h4>
+            <p>We help companies establish their operations in India with greater ease and in a shorter time frame. With
+                critical insights and tailored go-to-market strategies, we ensure your business is aligned with the
+                unique market landscape and customer behavior</p>
+        </div>
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

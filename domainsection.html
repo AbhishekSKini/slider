@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Darker+Grotesque:wght@300..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .domains-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .domain-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 45%;
+            min-width: 300px;
+            padding: 15px 20px;
+        }
+
+        .domain-heading {
+            font-size: 24px;
+            color: #000;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .domain-stars {
+            color: #10488E;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* Mobile view */
+        @media screen and (max-width: 768px) {
+            .domain-card {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .domain-heading {
+                font-size: 20px;
+            }
+
+            .domain-stars {
+                font-size: 18px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="domains-container">
+        <div class="domain-card">
+            <h3 class="domain-heading">In Vitro Diagnostics</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+
+        <div class="domain-card">
+            <h3 class="domain-heading">Softwares</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+
+        <div class="domain-card">
+            <h3 class="domain-heading">Transfusion Medicine</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+
+        <div class="domain-card">
+            <h3 class="domain-heading">Personal Health Device</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+
+        <div class="domain-card">
+            <h3 class="domain-heading">Near Patient Testing</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+
+        <div class="domain-card">
+            <h3 class="domain-heading">Point of care</h3>
+            <div class="domain-stars">★★★★★</div>
+        </div>
+    </div>
+</body>
+</html>
+
