@@ -39,6 +39,13 @@
       display: flex;
       transition: transform 0.5s ease-in-out;
       will-change: transform;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
     }
 
     .flip-card {
@@ -47,6 +54,7 @@
       height: 400px;
       margin: 0 10px;
       flex: 0 0 auto;
+      scroll-snap-align: center;
     }
 
     .flip-card-inner {
@@ -58,9 +66,9 @@
       transform-style: preserve-3d;
     }
 
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
+    .flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
 
     .flip-card-front,
     .flip-card-back {
@@ -125,12 +133,10 @@
       border: none;
       padding: 15px;
       font-size: 12px;
-     
       border-radius: 50%;
       cursor: pointer;
       z-index: 10;
     }
-  
 
     .carousel-btn.prev {
       left: -30px;
@@ -142,28 +148,28 @@
 
     @media (max-width: 1024px) {
       .flip-card {
-        width: 200px;
-        height: 320px;
-        margin: 0 5px;
+        width: 90vw;
+        height: 400px;
+        margin: 0 5vw;
       }
-.carousel-container{
-    height: 400px;
-}
-      .carousel-btn {
-        padding: 10px;
-        font-size: 14px;
+
+    
+
+      .carousel-container {
+        height: 430px;
       }
-      .carousel-btn.prev {
-      left: 35px !important;
+
+      .flip-card-inner {
+        height: 400px;
+      }
+      
+    .carousel-btn.prev {
+      left: 30px !important;
     }
 
     .carousel-btn.next {
-      right: 35px !important;
+      right: 30px !important;
     }
-    .flip-card-inner{
-        height: 400px;
-    }
-
     }
   </style>
 </head>
@@ -173,7 +179,9 @@
     <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
 
     <div class="carousel-container">
-      <div class="carousel">
+      <div class="carousel" id="carousel">
+        <!-- Your original flip cards go here -->
+        <!-- Pasting just one example below — keep all your cards as-is -->
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
@@ -308,6 +316,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Repeat all your other flip-cards here -->
       </div>
     </div>
 
@@ -330,13 +340,35 @@
       currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
 
       const shift = currentIndex * cardWidth;
-      carousel.style.transform = `translateX(-${shift}px)`;
+      carousel.scrollTo({ left: shift, behavior: 'smooth' });
     }
+
+    // Swipe support for touch devices
+    const carousel = document.getElementById('carousel');
+    let startX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        moveSlide(diff > 0 ? 1 : -1);
+      }
+    });
 
     window.addEventListener('resize', () => {
       currentIndex = 0;
       moveSlide(0);
     });
+    document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+  });
   </script>
 </body>
 </html>
