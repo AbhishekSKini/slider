@@ -123,12 +123,14 @@
       background: rgba(0, 0, 0, 0.6);
       color: white;
       border: none;
-      padding: 12px;
-      font-size: 16px;
+      padding: 15px;
+      font-size: 12px;
+     
       border-radius: 50%;
       cursor: pointer;
       z-index: 10;
     }
+  
 
     .carousel-btn.prev {
       left: -30px;
@@ -138,24 +140,30 @@
       right: -30px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .flip-card {
         width: 200px;
         height: 320px;
         margin: 0 5px;
       }
-
+.carousel-container{
+    height: 400px;
+}
       .carousel-btn {
         padding: 10px;
         font-size: 14px;
       }
       .carousel-btn.prev {
-      left: 5px;
+      left: 35px !important;
     }
 
     .carousel-btn.next {
-      right: 5px;
+      right: 35px !important;
     }
+    .flip-card-inner{
+        height: 400px;
+    }
+
     }
   </style>
 </head>
