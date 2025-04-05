@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Flip Card Carousel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+      width: 90%;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      width: 250px;
+      height: 400px;
+      margin: 0 10px;
+      flex: 0 0 auto;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s ease-in-out;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      background: #f9fafb;
+    }
+
+    .flip-card-front {
+      transform: rotateY(0deg);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front img {
+      width: 190px;
+      border-radius: 11px;
+    }
+
+    .flip-card-front h3 {
+      color: black;
+      font-size: 20px;
+    }
+
+    .flip-card-front p {
+      color: rgb(90, 88, 88);
+      font-size: 11px;
+      line-height: 1rem;
+      margin-top: 10px;
+    }
+
+    .expert-details {
+      margin-top: 10px;
+      height: 100px;
+    }
+
+    .flip-card-back h4 {
+      color: black;
+      font-size: 16px;
+      text-align: left;
+      font-weight: 400;
+      overflow-y: auto;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .carousel-btn.prev {
+      left: -30px;
+    }
+
+    .carousel-btn.next {
+      right: -30px;
+    }
+
+    @media (max-width: 768px) {
+      .flip-card {
+        width: 200px;
+        height: 320px;
+        margin: 0 5px;
+      }
+
+      .carousel-btn {
+        padding: 10px;
+        font-size: 14px;
+      }
+      .carousel-btn.prev {
+      left: 5px;
+    }
+
+    .carousel-btn.next {
+      right: 5px;
+    }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel-wrapper">
+    <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/sangeeth-1086x1536.png" alt="Image 1">
+                    <div class="expert-details">
+                        <h3>Sangeeth Kini</h3>
+                        <p>MBA in Marketing & Finance, Masters in Business Laws, Post Graduate Diploma in Medical Law &
+                            Ethics, Certified Independent Director</p>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:auto;">
+
+                        With over 27 years of experience in Healthcare, IVD, and Transfusion Sciences, he brings
+                        extensive expertise and strategic insight to companies looking to establish their operations in
+                        India. He has held key leadership roles at renowned organizations including Hemogenomics,
+                        Transasia Biomedicals, Quest Diagnostics, and Bio-Rad Laboratories. </h4>
+                    <h4 style="margin-bottom:1px"> Sangeeth is the Founder of Sanstrat.</h4><br />
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/4.png" alt="Image 3">
+                    <div class="expert-details">
+                        <h3>Vijay Narayan</h3>
+                        <p>B.Sc, Master of Business Administration.</p>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:auto;">Seasoned Healthcare Consultant with 30+ years of experience in sales, marketing, and business
+                        development, specializing in POC, IVD, and Homecare products. Served as Sales Head, Roche POC &
+                        Lab Diagnostics products and Country Manager, ARKRAY India.​</h4>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/3.png" alt="Image 2">
+                    <div class="expert-details">
+                        <h3>Jaldeep Bhansali</h3>
+                        <p>M. Sc. (Biochemistry), PGDBA (Post Graduate Diploma in Business Administration)</p>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:auto;">Jaldeep brings over 30 years of pan-India experience in rapidly establishing and expanding
+                        global
+                        businesses and brands across the country. His extensive career includes roles such as Project
+                        Director at Horiba, VP at Lab India, Market Development Manager at Ortho Clinical Diagnostics,
+                        and
+                        General Manager at Sysmex India. He is widely regarded as one of the foremost experts in
+                        Hematological Technologies in India.
+
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/2-1.png" alt="Image 4">
+                    <div class="expert-details">
+                        <h3>Balram Parath</h3>
+                        <p>MSc Clinical Biochemistry, MBA</p>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <h4>Balram has extensive experience in the IVD, Transfusion Medicine, Life Sciences, and Healthcare
+                        Services industries, having held diverse roles across various disciplines. His career spans
+                        frontline sales, product management, marketing, operations, and P&L responsibilities in
+                        high-growth
+                        markets like India and the Middle East. He has worked with prominent companies such as Bio-Rad
+                        Laboratories, Span Healthcare, Mylab Discoveries, and Kirloskar Technologies.</h4>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/5.png" alt="Image 4">
+                    <div class="expert-details">
+                        <h3>Sudha Morey</h3>
+                        <p>Postgraduate in Applied Biology.</p>
+                    </div>
+
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:auto;">With over 19 years of experience in research, marketing, sales and training, Sudha has worked
+                        with prominent companies such as Cipla, Randox Laboratories, Transasia Biomedicals, Roche
+                        Diagnostics, and Tata Medical & Diagnostics. She had worked in the areas of Immunology and
+                        Molecular Diagnostics, bringing domain expertise to her work in these fields.</h4>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/02/1-1.png" alt="Image 4">
+                    <div class="expert-details">
+                        <h3>O T Rajesh </h3>
+                        <p>Bachelor of Technology in Electronics & Communication, Post Graduate Diploma in Business
+                            Management.</p>
+                    </div>
+
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:scroll;">Rajesh is a seasoned healthcare professional with over 30 years of
+                        diverse experience in the Medical Devices sector, specializing in Diagnostics, Surgical,
+                        Critical Care, Neonatology, and Health Services. His broad expertise encompasses Sales &
+                        Marketing, People Management and Development, Distribution Channel Management, Operations &
+                        Quality Assurance, Market Development, and Project Leadership. Throughout his career, Rajesh has
+                        demonstrated a strong ability to drive growth, optimize operations, and lead teams to success in
+                        complex healthcare environments.</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://sanstrat.in/wp-content/uploads/2025/03/Sunil.png" alt="Image 4">
+                    <div class="expert-details">
+                        <h3>Sunil Dhadkar</h3>
+                        <p>Master of Pharmacy, D.B.M.</p>
+                    </div>
+
+                </div>
+                <div class="flip-card-back">
+                    <h4 style="overflow-y:scroll;">Sunil is a dynamic professional with 30 years of experience in IVD industry. He brings an expertise in IVD sales, marketing, business development, product management and P&L Management with exposure to India domestic market. He has held leadership roles in esteemed organizations such as Ranbaxy Laboratories, Transasia Biomedicals, Meril Life sciences, BioGenex Lifesciences, Span Cogent Diagnostics and Trivitron healthcare.</h4>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+
+    function moveSlide(direction) {
+      const carousel = document.querySelector('.carousel');
+      const cards = document.querySelectorAll('.flip-card');
+      const container = document.querySelector('.carousel-container');
+
+      const visibleWidth = container.offsetWidth;
+      const cardWidth = cards[0].offsetWidth + 20;
+      const maxIndex = Math.max(0, cards.length - Math.floor(visibleWidth / cardWidth));
+
+      currentIndex += direction;
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+      const shift = currentIndex * cardWidth;
+      carousel.style.transform = `translateX(-${shift}px)`;
+    }
+
+    window.addEventListener('resize', () => {
+      currentIndex = 0;
+      moveSlide(0);
+    });
+  </script>
+</body>
+</html>
